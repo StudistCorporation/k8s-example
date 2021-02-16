@@ -1,0 +1,55 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: echo-server
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: echo.lvh.me
+    http:
+      paths:
+      - backend:
+          serviceName: echo-server
+          servicePort: http
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: echo-server
+spec:
+  selector:
+    app.kubernetes.io/name: echo-server
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: echo-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: echo-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: echo-server
+    spec:
+      containers:
+      - name: echo-server
+        image: hashicorp/http-echo
+        args:
+        - -text="hello world"
+        ports:
+        - name: http
+          containerPort: 5678
+          protocol: TCP
