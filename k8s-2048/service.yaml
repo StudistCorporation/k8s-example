@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # k8s-2048 Namespaceに作成されるように指定する
+  namespace: k8s-2048
+  # Service名
+  name: k8s-2048
+spec:
+  # サービス種別の指定
+  # NodePortやLoadBalancer、ExternalNameなどがあるが、基本的にはClusterIPを指定する
+  # デフォルトもClusterIPなので指定しなくても良い
+  type: ClusterIP
+
+  # Podのmetadata.labelsと同じ内容を指定することで
+  # Serviceに対してリクエストがきた場合に、マッチしているPodにリクエストされるようになる
+  # マッチするPodが複数ある場合は、そのPodに分散してリクエストされる
+  selector:
+    app.kubernetes.io/name: k8s-2048
+
+  # Serviceで公開するポートとそれに対応するPodのポートのマッピングを定義する
+  # 今回だと「Serviceの80ポートへリクエストがきたら、Podのhttpという名前で公開されているポートへリクエストする」という定義になる
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  # k8s-2048 Namespaceに作成されるように指定する
+  namespace: k8s-2048
+  # Ingress名
+  name: k8s-2048
+  annotations:
+    # どのIngress Controllerを利用するかどうかの指定
+    # AWS LB Controllerの場合だと、albを指定したりする
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  # hostにはホスト名を指定することができる
+  # 指定しなくても良い
+  - host: k8s-2048.lvh.me
+    http:
+      paths:
+      # Ingressが指定したホスト名でリクエストがきた場合に、
+      # どのサービスのどのポートへリクエストを投げるのか指定する
+      - backend:
+          # Service名　
+          serviceName: k8s-2048
+          # Serviceで公開したポート番号か、nameを指定する
+          servicePort: http
