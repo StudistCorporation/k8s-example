@@ -1,16 +1,16 @@
+---
 # https://kind.sigs.k8s.io/docs/user/configuration/
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
-  image: kindest/node:v1.18.19@sha256:530378628c7c518503ade70b1df698b5de5585dcdba4f349328d986b8849b1ee
+  image: kindest/node:v1.21.1@sha256:69860bda5563ac81e3c0057d654b5253219618a22ec3a346306239bba8cfa1a6
   kubeadmConfigPatches:
   - |
     kind: InitConfiguration
     nodeRegistration:
       kubeletExtraArgs:
         node-labels: 'ingress-ready=true'
-        authorization-mode: 'AlwaysAllow'
   extraPortMappings:
   - containerPort: 80
     hostPort: 80
