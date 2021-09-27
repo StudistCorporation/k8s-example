@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: default
@@ -10,9 +10,12 @@ spec:
   - host: echo.lvh.me
     http:
       paths:
-      - backend:
-          serviceName: echo-server
-          servicePort: http
+      - pathType: ImplementationSpecific
+        backend:
+          service:
+            name: echo-server
+            port:
+              name: http
 
 ---
 apiVersion: v1

@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   # k8s-2048 Namespaceに作成されるように指定する
@@ -18,8 +18,11 @@ spec:
       paths:
       # Ingressが指定したホスト名でリクエストがきた場合に、
       # どのサービスのどのポートへリクエストを投げるのか指定する
-      - backend:
-          # Service名　
-          serviceName: k8s-2048
-          # Serviceで公開したポート番号か、nameを指定する
-          servicePort: http
+      - pathType: ImplementationSpecific
+        backend:
+          service:
+            # Service名　
+            name: k8s-2048
+            # Serviceで公開したポート名を指定する
+            port:
+              name: http
