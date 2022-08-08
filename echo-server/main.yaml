@@ -50,10 +50,8 @@ spec:
     spec:
       containers:
       - name: echo-server
-        image: hashicorp/http-echo
-        args:
-        - -text="hello world"
+        image: ealen/echo-server
         ports:
         - name: http
-          containerPort: 5678
+          containerPort: 80
           protocol: TCP
