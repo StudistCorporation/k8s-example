@@ -5,10 +5,29 @@
 ## Requirements
 
 - Docker ... 20.10.7 or greater
-- kind ... v0.11.1 or greater
-- kubectl ... v1.21.2 or greater
 
-## セットアップ
+## Setup
+
+### aquaをインストールする
+
+このリポジトリでは[aqua](https://aquaproj.github.io/)を使って各種ツールを管理しているため、aquaをインストールします。
+
+Homebrewを使っている環境かつ、bashを利用している人は以下のようにセットアップしてください。
+
+```bash
+brew install aquaproj/aqua/aqua
+echo 'export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"' >> .bashrc
+```
+
+それ以外の場合は、[Quick Start | aqua](https://aquaproj.github.io/docs/tutorial-basics/quick-start)を参考にしてセットアップしてください。
+
+### 各種ツールをaqua経由でインストールする
+
+aquaのセットアップが終わったら、このディレクトリでinstallコマンドを実行してください。
+
+```sh
+aqua i
+```
 
 ### クラスタを作成する
 
@@ -35,7 +54,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 kubectl apply -f echo-server/main.yaml
 ```
 
-## ティアダウン
+## Teardown
 
 ### クラスタを削除する
 
