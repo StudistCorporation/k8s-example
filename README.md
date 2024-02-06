@@ -19,7 +19,7 @@ brew install aquaproj/aqua/aqua
 echo 'export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"' >> .bashrc
 ```
 
-それ以外の場合は、[Quick Start | aqua](https://aquaproj.github.io/docs/tutorial-basics/quick-start)を参考にしてセットアップしてください。
+それ以外の場合は、[Quick Start | aqua](https://aquaproj.github.io/docs/tutorial/)を参考にしてセットアップしてください。
 
 ### 各種ツールをaqua経由でインストールする
 
